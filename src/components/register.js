@@ -32,10 +32,13 @@ const Register = (props) => {
     const userRegister = (event) => {
         event.preventDefault();
         //To Do ....
-
-        axios.post('https://localhost:8080/register', {
-
-        }).then(res => {
+        const users = {
+            firstname: firstName,
+            lastname: lastName,
+            email: email,
+            password: password
+        }
+        axios.post('http://localhost:8080/api/user/register', users).then(res => {
             alert("Register Successfully!!");
             navigate("/");
             console.log(res);

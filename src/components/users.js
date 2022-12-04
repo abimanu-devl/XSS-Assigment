@@ -9,26 +9,31 @@ const User = (props) => {
 
     const [users, setUsers] = useState([]);
 
-    const listUsers = (event) => {
-        event.preventDefault();
+    const listUsers = () => {
         //To Do ....
-
-        axios.get('https://localhost:8080/user', {
-
-        }).then(res => {
-            alert(res.data);
-            console.log(res);
+        axios.get('http://localhost:8080/api/user/all').then(res => {
+            console.log(res.data.data);
+            setUsers(res.data.data)
         }).catch(err => {
             alert(err);
         }
         );
     }
 
+    useEffect(() => {
+        listUsers();
+    }, []);
+
     return (
         <div>
             <center><h1>User Page</h1></center>
-            {/* To do ---> loop  */}
-            <>{listUsers}</>
+            <>{users.map((value, index) => (
+                <div>
+                    <p>{"First Name : "}{value.firstname}</p>
+                    <p>{"Last Name  : "}{value.lastname}</p>
+                    <p>{"Email  :"}{value.email}</p>
+                </div>
+            ))}</>
         </div>
     );
 

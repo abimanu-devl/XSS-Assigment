@@ -21,11 +21,12 @@ const Login = (props) => {
 
     const userLogin = (event) => {
         event.preventDefault();
-        //To Do ....
-
-        axios.post('https://localhost:8080/login', {
-
-        }).then(res => {
+        const loginCredentials = {
+            email: email,
+            password: password
+        }
+        axios.post('http://localhost:8080/api/user/login', loginCredentials).then(res => {
+            console.log(res.data)
             alert("Login Successfully!!");
             navigate("/users")
             console.log(res);
